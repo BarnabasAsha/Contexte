@@ -1,4 +1,3 @@
-// API client for communicating with the backend server
 export interface ContextDefinition {
   word: string;
   literalMeaning: string;
@@ -70,32 +69,30 @@ const mockDefinitions: Record<string, ContextDefinition> = {
   },
 };
 
-// Simulate request counts
 let mockRequestCount = 23;
 const maxRequests = 100;
 
-// Mock history storage
 const mockHistory: HistoryItem[] = [
   {
     id: "1",
     word: "bank",
     context: "I walked along the river bank during sunset.",
     definition: mockDefinitions.bank,
-    timestamp: new Date(Date.now() - 3600000).toISOString(), // 1 hour ago
+    timestamp: new Date(Date.now() - 3600000).toISOString(),
   },
   {
     id: "2",
     word: "run",
     context: "She decided to run the marathon next month.",
     definition: mockDefinitions.run,
-    timestamp: new Date(Date.now() - 7200000).toISOString(), // 2 hours ago
+    timestamp: new Date(Date.now() - 7200000).toISOString(),
   },
   {
     id: "3",
     word: "light",
     context: "The package was surprisingly light to carry.",
     definition: mockDefinitions.light,
-    timestamp: new Date(Date.now() - 10800000).toISOString(), // 3 hours ago
+    timestamp: new Date(Date.now() - 10800000).toISOString(),
   },
 ];
 
@@ -104,20 +101,17 @@ class ApiClient {
   private useMockData: boolean;
 
   constructor() {
-    this.baseUrl = "http://localhost:3000/api"; // Change as needed
+    this.baseUrl = "http://localhost:3000/api";
 
-    // Enable mock data when server isn't available
-    this.useMockData = true; // Set to false when your server is ready
+    this.useMockData = true;
   }
 
-  // Simulate network delay
   private async simulateDelay(min = 200, max = 800): Promise<void> {
     if (!this.useMockData) return;
     const delay = Math.random() * (max - min) + min;
     return new Promise((resolve) => setTimeout(resolve, delay));
   }
 
-  // Generate a mock definition for unknown words
   private generateMockDefinition(word: string): ContextDefinition {
     const partsOfSpeech = ["noun", "verb", "adjective", "adverb"];
     const randomPos =
@@ -128,7 +122,7 @@ class ApiClient {
       literalMeaning: `The literal meaning of "${word}" - a common ${randomPos} in English.`,
       contextualMeaning: `In this context, "${word}" refers to its contextual usage based on surrounding text.`,
       partOfSpeech: randomPos,
-      confidence: Math.random() * 0.3 + 0.7, // Between 0.7 and 1.0
+      confidence: Math.random() * 0.3 + 0.7,
       timestamp: new Date().toISOString(),
     };
   }
@@ -139,21 +133,17 @@ class ApiClient {
     if (this.useMockData) {
       await this.simulateDelay();
 
-      // Simulate occasional errors (5% chance)
       if (Math.random() < 0.05) {
         throw new Error("Mock network error - please try again");
       }
 
-      // Get or generate mock definition
       const definition =
         mockDefinitions[request.word.toLowerCase()] ||
         this.generateMockDefinition(request.word);
 
-      // Update request count
       mockRequestCount++;
       const remainingRequests = Math.max(0, maxRequests - mockRequestCount);
 
-      // Add to mock history
       const historyItem: HistoryItem = {
         id: Date.now().toString(),
         word: request.word,
@@ -161,9 +151,8 @@ class ApiClient {
         definition,
         timestamp: new Date().toISOString(),
       };
-      mockHistory.unshift(historyItem); // Add to beginning
+      mockHistory.unshift(historyItem);
 
-      // Keep only last 50 items
       if (mockHistory.length > 50) {
         mockHistory.splice(50);
       }
@@ -214,7 +203,7 @@ class ApiClient {
         totalRequests: mockRequestCount,
         remainingRequests: Math.max(0, maxRequests - mockRequestCount),
         maxRequests,
-        resetTime: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours from now
+        resetTime: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       };
     }
 
@@ -230,7 +219,6 @@ class ApiClient {
     } catch (error) {
       console.error("Failed to fetch request stats:", error);
 
-      // Return default stats on error
       return {
         totalRequests: 0,
         remainingRequests: 100,
@@ -243,7 +231,6 @@ class ApiClient {
     if (this.useMockData) {
       await this.simulateDelay(150, 400);
 
-      // Return a copy to avoid external modifications
       return [...mockHistory];
     }
 
@@ -262,11 +249,10 @@ class ApiClient {
     }
   }
 
-  // Health check method
   async checkHealth(): Promise<boolean> {
     if (this.useMockData) {
       await this.simulateDelay(50, 200);
-      // Simulate 95% uptime
+
       return Math.random() > 0.05;
     }
 
@@ -281,18 +267,15 @@ class ApiClient {
     }
   }
 
-  // Method to toggle between mock and real API
   setMockMode(useMock: boolean): void {
     this.useMockData = useMock;
   }
 
-  // Method to reset mock data (useful for testing)
   resetMockData(): void {
     mockRequestCount = 0;
     mockHistory.length = 0;
   }
 
-  // Method to add custom mock definitions
   addMockDefinition(
     word: string,
     definition: Partial<ContextDefinition>
@@ -311,7 +294,6 @@ class ApiClient {
 
 export const apiClient = new ApiClient();
 
-// Helper functions for error handling
 export function isNetworkError(error: Error): boolean {
   return (
     error.message.includes("fetch") ||
