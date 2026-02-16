@@ -48,5 +48,4 @@ npm run type-check   # TypeScript type checking
 - Client uses Svelte 4 with TypeScript
 - AI providers implement the `AIProvider` interface with automatic fallback
 - Shared types live in `client/src/lib/types.ts`
-- History stored in `chrome.storage.local`
 - Server port: 3004 (configured via .env)
