@@ -1,29 +1,26 @@
-import express, { json, urlencoded } from "express";
-import dotenv from "dotenv";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { secureHeaders } from "hono/secure-headers";
+import { logger } from "hono/logger";
+import { serve } from "@hono/node-server";
+import { config } from "./lib/config.js";
+import { rateLimiter } from "./middleware/rate-limit.js";
+import { errorHandler } from "./middleware/error-handler.js";
+import { health } from "./routes/health.js";
+import { define } from "./routes/define.js";
 
-dotenv.config();
+const app = new Hono();
 
-export function createApp(): express.Express {
-  const app = express();
+app.use("*", logger());
+app.use("*", cors());
+app.use("*", secureHeaders());
+app.use("/api/*", rateLimiter);
 
-  app.use(urlencoded({ extended: true }));
+app.route("/api/health", health);
+app.route("/api/define", define);
 
-  app.use(json());
+app.onError(errorHandler);
 
-  app.use((req, res, next) => {
-    console.log(`Request: ${req.method} ${req.path}`);
-    next();
-  });
-
-  return app;
-}
-
-function serve(app: express.Express) {
-  const port = process.env.PORT || 3004;
-
-  app.listen(port, () =>
-    console.log(`Contexte listening at http://localhost:${port}`)
-  );
-}
-
-serve(createApp());
+serve({ fetch: app.fetch, port: config.port }, () => {
+  console.log(`Contexte listening at http://localhost:${config.port}`);
+});

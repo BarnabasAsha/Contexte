@@ -1,0 +1,80 @@
+export interface WordOfTheDay {
+  word: string;
+  partOfSpeech: string;
+  definition: string;
+  example: string;
+}
+
+const words: WordOfTheDay[] = [
+  { word: "Ephemeral", partOfSpeech: "adjective", definition: "Lasting for a very short time; transient.", example: "The ephemeral beauty of cherry blossoms draws thousands of visitors each spring." },
+  { word: "Sonder", partOfSpeech: "noun", definition: "The realization that each passerby has a life as vivid and complex as your own.", example: "Standing in the crowded station, she felt a wave of sonder wash over her." },
+  { word: "Petrichor", partOfSpeech: "noun", definition: "The pleasant, earthy smell produced when rain falls on dry soil.", example: "After weeks of drought, the petrichor that followed the first rain was intoxicating." },
+  { word: "Surreptitious", partOfSpeech: "adjective", definition: "Kept secret, especially because it would not be approved of.", example: "He cast a surreptitious glance at the classified document on the desk." },
+  { word: "Ineffable", partOfSpeech: "adjective", definition: "Too great or extreme to be expressed or described in words.", example: "The ineffable joy of holding her newborn child left her speechless." },
+  { word: "Mellifluous", partOfSpeech: "adjective", definition: "Sweet or musical; pleasant to hear.", example: "The mellifluous tones of the cello filled the concert hall." },
+  { word: "Limerence", partOfSpeech: "noun", definition: "The state of being infatuated or obsessed with another person, typically involuntary.", example: "His limerence made it impossible to concentrate on anything but her." },
+  { word: "Defenestration", partOfSpeech: "noun", definition: "The act of throwing someone or something out of a window.", example: "The Defenestration of Prague in 1618 sparked the Thirty Years' War." },
+  { word: "Sesquipedalian", partOfSpeech: "adjective", definition: "Relating to or given to the use of long words.", example: "His sesquipedalian tendencies made his essays exhausting to read." },
+  { word: "Verisimilitude", partOfSpeech: "noun", definition: "The appearance of being true or real.", example: "The novel's verisimilitude made readers forget they were reading fiction." },
+  { word: "Lacuna", partOfSpeech: "noun", definition: "An unfilled space or gap; a missing portion in a text or manuscript.", example: "The historian noted a significant lacuna in the archaeological record." },
+  { word: "Palimpsest", partOfSpeech: "noun", definition: "Something reused or altered but still bearing visible traces of its earlier form.", example: "The city itself was a palimpsest, with Roman walls beneath medieval streets." },
+  { word: "Ennui", partOfSpeech: "noun", definition: "A feeling of listlessness and dissatisfaction arising from lack of occupation or excitement.", example: "The long, uneventful summer filled him with an unbearable ennui." },
+  { word: "Sibilant", partOfSpeech: "adjective", definition: "Making or characterized by a hissing sound.", example: "The sibilant whisper of the wind through the reeds was the only sound." },
+  { word: "Apricity", partOfSpeech: "noun", definition: "The warmth of the sun in winter.", example: "She sat on the bench, enjoying the rare apricity of a February afternoon." },
+  { word: "Liminal", partOfSpeech: "adjective", definition: "Occupying a position at, or on both sides of, a boundary or threshold.", example: "The airport lounge exists in a liminal space between departure and arrival." },
+  { word: "Susurrus", partOfSpeech: "noun", definition: "A whispering or rustling sound.", example: "The susurrus of leaves overhead created a natural lullaby." },
+  { word: "Paucity", partOfSpeech: "noun", definition: "The presence of something in only small or insufficient quantities.", example: "The paucity of evidence made it impossible to reach a verdict." },
+  { word: "Serendipity", partOfSpeech: "noun", definition: "The occurrence of events by chance in a happy or beneficial way.", example: "It was pure serendipity that they found the rare manuscript at a garage sale." },
+  { word: "Obstreperous", partOfSpeech: "adjective", definition: "Noisy and difficult to control.", example: "The obstreperous crowd made it impossible for the speaker to continue." },
+  { word: "Perspicacious", partOfSpeech: "adjective", definition: "Having a ready insight into and understanding of things; shrewd.", example: "Her perspicacious observations about the market earned her a fortune." },
+  { word: "Pulchritudinous", partOfSpeech: "adjective", definition: "Having great physical beauty.", example: "The pulchritudinous landscape of the valley left the hikers in awe." },
+  { word: "Callipygian", partOfSpeech: "adjective", definition: "Having well-shaped or finely developed buttocks.", example: "The callipygian statues of ancient Greece celebrated the idealized human form." },
+  { word: "Tmesis", partOfSpeech: "noun", definition: "The separation of parts of a compound word by an intervening word.", example: "\"Abso-blooming-lutely\" is a classic example of tmesis in English." },
+  { word: "Eigengrau", partOfSpeech: "noun", definition: "The uniform dark gray color seen by the eyes in perfect darkness.", example: "In the cave, with all lights extinguished, they perceived nothing but eigengrau." },
+  { word: "Saudade", partOfSpeech: "noun", definition: "A deep emotional state of nostalgic longing for something or someone absent.", example: "The old photograph filled her with saudade for her childhood home." },
+  { word: "Meraki", partOfSpeech: "noun", definition: "Doing something with soul, creativity, or love; putting something of yourself into your work.", example: "Every dish she cooked was prepared with meraki, transforming simple ingredients into art." },
+  { word: "Taciturn", partOfSpeech: "adjective", definition: "Reserved or uncommunicative in speech; saying little.", example: "The taciturn detective let the evidence speak for itself." },
+  { word: "Ataraxia", partOfSpeech: "noun", definition: "A state of serene calmness; freedom from emotional disturbance or anxiety.", example: "After years of meditation practice, he finally achieved a state of ataraxia." },
+  { word: "Recondite", partOfSpeech: "adjective", definition: "Little known; abstruse; dealing with something few people know about.", example: "The professor's recondite lectures on medieval alchemy attracted only the most dedicated students." },
+  { word: "Evanescent", partOfSpeech: "adjective", definition: "Soon passing out of sight, memory, or existence; quickly fading.", example: "The evanescent glow of the fireflies lit up the summer evening." },
+  { word: "Agathism", partOfSpeech: "noun", definition: "The belief that all things tend toward ultimate good.", example: "Her agathism kept her optimistic even during the darkest chapters of her life." },
+  { word: "Vellichor", partOfSpeech: "noun", definition: "The strange wistfulness of used bookstores.", example: "Browsing the dusty shelves, she was overcome by a familiar vellichor." },
+  { word: "Phosphene", partOfSpeech: "noun", definition: "A ring or spot of light produced by pressure on the eyeball when the eyelids are closed.", example: "He rubbed his tired eyes and watched the phosphenes dance behind his lids." },
+  { word: "Paraprosdokian", partOfSpeech: "noun", definition: "A figure of speech in which the latter part of a sentence is unexpected in a way that causes the reader to reframe the first part.", example: "\"I've had a perfectly wonderful evening — but this wasn't it\" is a famous paraprosdokian." },
+  { word: "Alexithymia", partOfSpeech: "noun", definition: "The inability to identify and describe emotions experienced by oneself.", example: "His alexithymia made therapy sessions particularly challenging." },
+  { word: "Quiddity", partOfSpeech: "noun", definition: "The inherent nature or essence of someone or something.", example: "The quiddity of the poem eluded even the most seasoned literary critics." },
+  { word: "Concatenation", partOfSpeech: "noun", definition: "A series of interconnected things or events linked together.", example: "An unlikely concatenation of circumstances led to the discovery." },
+  { word: "Redolent", partOfSpeech: "adjective", definition: "Strongly reminiscent or suggestive of something.", example: "The old library was redolent of leather and pipe tobacco." },
+  { word: "Brontide", partOfSpeech: "noun", definition: "A low, distant rumbling sound like thunder, often from seismic activity.", example: "The brontide echoing through the valley puzzled the geologists for weeks." },
+  { word: "Sempiternal", partOfSpeech: "adjective", definition: "Eternal and unchanging; everlasting.", example: "The philosopher argued for the sempiternal nature of mathematical truths." },
+  { word: "Numinous", partOfSpeech: "adjective", definition: "Having a strong religious or spiritual quality; awe-inspiring.", example: "Standing in the ancient cathedral, she felt a numinous presence surrounding her." },
+  { word: "Eleemosynary", partOfSpeech: "adjective", definition: "Relating to or dependent on charity; charitable.", example: "The foundation's eleemosynary mission focused on providing clean water to rural communities." },
+  { word: "Clinquant", partOfSpeech: "adjective", definition: "Glittering with gold or silver; adorned with tinsel.", example: "The clinquant decorations transformed the modest hall into a dazzling ballroom." },
+  { word: "Ethereal", partOfSpeech: "adjective", definition: "Extremely delicate and light in a way that seems not of this world.", example: "The ethereal music of the harp seemed to float on the evening air." },
+  { word: "Penumbra", partOfSpeech: "noun", definition: "The partially shaded outer region of a shadow; an area of uncertainty.", example: "The legal penumbra surrounding digital privacy rights continues to challenge courts." },
+  { word: "Crepuscular", partOfSpeech: "adjective", definition: "Of, resembling, or relating to twilight.", example: "Deer are crepuscular animals, most active during dawn and dusk." },
+  { word: "Abderian", partOfSpeech: "adjective", definition: "Given to incessant or foolish laughter.", example: "His abderian response to the solemn ceremony drew disapproving stares." },
+  { word: "Syzygy", partOfSpeech: "noun", definition: "An alignment of three celestial bodies; a pair of connected or corresponding things.", example: "The syzygy of the sun, earth, and moon produced a spectacular total eclipse." },
+  { word: "Anagnorisis", partOfSpeech: "noun", definition: "The moment in a story when a character makes a critical discovery or recognition.", example: "The anagnorisis in Oedipus Rex remains one of literature's most devastating revelations." },
+  { word: "Virga", partOfSpeech: "noun", definition: "Streaks of rain or ice crystals falling from a cloud but evaporating before reaching the ground.", example: "The virga trailing from the distant clouds painted purple streaks across the sunset." },
+  { word: "Orphic", partOfSpeech: "adjective", definition: "Resembling the music attributed to Orpheus; entrancing or mysterious.", example: "The orphic quality of her poetry drew readers into a trance-like state." },
+  { word: "Zugzwang", partOfSpeech: "noun", definition: "A situation in which the obligation to make a move is a serious disadvantage.", example: "The negotiator found herself in zugzwang — any concession would weaken her position." },
+  { word: "Selcouth", partOfSpeech: "adjective", definition: "Unfamiliar, rare, strange, and yet marvelous.", example: "The selcouth landscape of Iceland seemed to belong to another planet entirely." },
+  { word: "Pluviophile", partOfSpeech: "noun", definition: "A person who loves rain; one who finds joy and peace during rainy days.", example: "As a true pluviophile, she kept her window open during every storm." },
+  { word: "Scintilla", partOfSpeech: "noun", definition: "A tiny trace or spark of a specified quality or feeling.", example: "There was not a scintilla of doubt in the jury's verdict." },
+  { word: "Hiraeth", partOfSpeech: "noun", definition: "A deep longing for a home you cannot return to, or one that never was.", example: "The émigré's memoir was suffused with hiraeth for a country that no longer existed." },
+  { word: "Denouement", partOfSpeech: "noun", definition: "The final resolution of the intricacies of a plot.", example: "The denouement revealed that the detective had been the culprit all along." },
+  { word: "Simulacrum", partOfSpeech: "noun", definition: "An image or representation of someone or something; an unsatisfying imitation.", example: "The theme park was a simulacrum of European cities, charming but hollow." },
+  { word: "Kairos", partOfSpeech: "noun", definition: "The perfect, delicate, or crucial moment; the opportune time for action.", example: "She recognized the kairos and made her pitch to the investors." },
+  { word: "Catharsis", partOfSpeech: "noun", definition: "The process of releasing strong or repressed emotions, providing relief.", example: "Writing in her journal every night served as a much-needed catharsis." },
+  { word: "Apophenia", partOfSpeech: "noun", definition: "The tendency to perceive meaningful connections between unrelated things.", example: "His apophenia led him to see conspiracy in every coincidence." },
+  { word: "Peripatetic", partOfSpeech: "adjective", definition: "Traveling from place to place, especially working in various locations.", example: "Her peripatetic lifestyle meant she rarely stayed in one city for more than a month." },
+  { word: "Sternutation", partOfSpeech: "noun", definition: "The act of sneezing or a sneeze.", example: "A sudden sternutation interrupted the otherwise silent examination hall." },
+  { word: "Palilalia", partOfSpeech: "noun", definition: "A speech disorder involving involuntary repetition of words or phrases.", example: "The neurologist identified the patient's repetitive speech patterns as palilalia." },
+];
+
+export function getWordOfTheDay(): WordOfTheDay {
+  const daysSinceEpoch = Math.floor(Date.now() / 86_400_000);
+  const index = daysSinceEpoch % words.length;
+  return words[index]!;
+}

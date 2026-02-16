@@ -1,13 +1,5 @@
 import Tooltip from "../components/Tooltip.svelte";
-
-interface Definition {
-  word: string;
-  literalMeaning: string;
-  contextualMeaning: string;
-  partOfSpeech?: string;
-  confidence: number;
-  timestamp: string;
-}
+import type { Definition } from "../lib/types";
 
 class ContextTooltip {
   private tooltipContainer: HTMLElement | null = null;
@@ -16,7 +8,6 @@ class ContextTooltip {
 
   constructor() {
     this.setupEventListeners();
-    console.log("ContextTooltip initialized on:", window.location.href);
   }
 
   private setupEventListeners() {
