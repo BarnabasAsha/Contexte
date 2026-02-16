@@ -1,6 +1,6 @@
 import type { Definition } from "./types";
 
-const BASE_URL = "http://localhost:3004/api";
+const BASE_URL = process.env.API_BASE_URL;
 
 class ApiError extends Error {
   constructor(public status: number, message: string) {
@@ -50,14 +50,19 @@ export function isRateLimitError(error: unknown): boolean {
 }
 
 export function getErrorMessage(error: unknown): string {
-  if (error instanceof ApiError && error.status === 429) {
-    return "Rate limit exceeded. Please wait before making more requests.";
-  }
-  if (error instanceof Error) {
-    if (error.message.includes("Failed to fetch")) {
-      return "Network error. Please check your connection and try again.";
+  if (error instanceof ApiError) {
+    if (error.status === 429) {
+      return "You've made too many requests. Please wait a moment and try again.";
     }
-    return error.message;
+    if (error.status >= 500) {
+      return "We couldn't look up this word for you right now. Please try again shortly.";
+    }
+    if (error.status === 400) {
+      return "We couldn't process that text. Try selecting a single word or shorter phrase.";
+    }
   }
-  return "An unexpected error occurred";
+  if (error instanceof Error && error.message.includes("Failed to fetch")) {
+    return "Couldn't reach the server. Please check your connection and try again.";
+  }
+  return "Something went wrong. Please try again in a moment.";
 }

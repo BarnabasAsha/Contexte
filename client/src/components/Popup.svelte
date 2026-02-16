@@ -5,132 +5,181 @@
 </script>
 
 <main class="popup">
-  <header class="popup-header">
-    <h1 class="popup-title">Contexte</h1>
+  <header class="header">
+    <span class="logo">C</span>
+    <span class="brand">Contexte</span>
   </header>
 
-  <div class="how-to-use">
-    <h3>How to use</h3>
-    <ol>
-      <li>Select any text on a webpage</li>
-      <li>Right-click and choose "Get Context"</li>
-      <li>View the definition tooltip</li>
-    </ol>
-  </div>
-
   <section class="wotd">
-    <h3 class="wotd-label">Word of the Day</h3>
-    <div class="wotd-card">
-      <div class="wotd-header">
-        <span class="wotd-word">{word.word}</span>
-        <span class="wotd-pos">{word.partOfSpeech}</span>
-      </div>
-      <p class="wotd-definition">{word.definition}</p>
-      <p class="wotd-example">"{word.example}"</p>
+    <span class="wotd-label">Word of the day</span>
+    <div class="wotd-word">{word.word}</div>
+    <span class="wotd-pos">{word.partOfSpeech}</span>
+    <p class="wotd-definition">{word.definition}</p>
+    <blockquote class="wotd-example">{word.example}</blockquote>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="usage">
+    <div class="usage-step">
+      <span class="step-num">1</span>
+      <span class="step-text">Select any text on a page</span>
+    </div>
+    <div class="usage-step">
+      <span class="step-num">2</span>
+      <span class="step-text">Right-click &mdash; "Get Context"</span>
+    </div>
+    <div class="usage-step">
+      <span class="step-num">3</span>
+      <span class="step-text">See the definition instantly</span>
     </div>
   </section>
 </main>
 
 <style>
   .popup {
-    width: 320px;
-    min-height: 400px;
-    background: white;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #333;
+    width: 300px;
+    background: #F2EDE4;
+    font-family: 'Geist Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #2C2C2C;
     display: flex;
     flex-direction: column;
   }
 
-  .popup-header {
-    padding: 16px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px 0;
+  }
+
+  .logo {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #E8773A, #D4622B);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
     color: white;
+    flex-shrink: 0;
+    line-height: 24px;
+    text-align: center;
   }
 
-  .popup-title {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 600;
-  }
-
-  .how-to-use {
-    padding: 12px 16px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .how-to-use h3 {
+  .brand {
     font-size: 13px;
     font-weight: 600;
-    margin: 0 0 6px 0;
-    color: #555;
-  }
-
-  .how-to-use ol {
-    font-size: 12px;
-    color: #666;
-    margin: 0;
-    padding-left: 18px;
-  }
-
-  .how-to-use li {
-    margin-bottom: 2px;
+    color: #2C2C2C;
+    letter-spacing: -0.2px;
   }
 
   .wotd {
-    padding: 16px;
-    flex: 1;
+    padding: 16px 16px 14px;
   }
 
   .wotd-label {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #999;
-    margin: 0 0 10px 0;
-  }
-
-  .wotd-card {
-    padding: 14px;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #667eea08, #764ba208);
-  }
-
-  .wotd-header {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
+    letter-spacing: 1px;
+    color: #A09A90;
+    display: block;
     margin-bottom: 10px;
   }
 
   .wotd-word {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
-    color: #333;
+    color: #1A1A1A;
+    letter-spacing: -0.4px;
+    line-height: 1.1;
+    margin-bottom: 4px;
   }
 
   .wotd-pos {
-    font-size: 12px;
-    color: #667eea;
+    font-size: 11px;
+    color: #D4622B;
     font-style: italic;
+    font-weight: 500;
   }
 
   .wotd-definition {
-    font-size: 13px;
-    color: #555;
-    line-height: 1.5;
-    margin: 0 0 10px 0;
+    font-size: 12.5px;
+    color: #5C5C5C;
+    line-height: 1.55;
+    margin: 10px 0 12px;
+    font-weight: 400;
   }
 
   .wotd-example {
-    font-size: 12px;
-    color: #888;
+    font-size: 11.5px;
+    color: #8A8580;
     font-style: italic;
-    line-height: 1.4;
+    line-height: 1.5;
     margin: 0;
-    padding-left: 10px;
-    border-left: 2px solid #667eea40;
+    padding: 8px 10px 8px 12px;
+    border: 1px solid #E8773A25;
+    background: #EBE6DD;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(232, 119, 58, 0.08);
+    position: relative;
+  }
+
+  .wotd-example::before {
+    content: "\201C";
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 18px;
+    color: #D4622B30;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .divider {
+    height: 1px;
+    background: #E2DACE;
+    margin: 0 16px;
+  }
+
+  .usage {
+    padding: 12px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .usage-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .step-num {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    background: #EBE6DD;
+    border: 1px solid #E8773A20;
+    box-shadow: 0 1px 2px rgba(232, 119, 58, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 600;
+    color: #A09A90;
+    flex-shrink: 0;
+    line-height: 18px;
+    text-align: center;
+  }
+
+  .step-text {
+    font-size: 11px;
+    color: #9A9590;
+    font-weight: 400;
   }
 </style>

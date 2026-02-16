@@ -1,4 +1,4 @@
-import { getDefinition } from "../lib/api";
+import { getDefinition, getErrorMessage } from "../lib/api";
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
@@ -11,25 +11,60 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "getContext" && info.selectionText && tab?.id) {
     const selectedText = info.selectionText.trim();
-
-    chrome.tabs.sendMessage(
-      tab.id,
-      {
-        action: "getContext",
-        selectedText: selectedText,
-      },
-      (response) => {
-        if (chrome.runtime.lastError) {
-          return;
-        }
-
-        if (response?.context) {
-          handleContextRequest(selectedText, response.context, tab.id!);
-        }
-      }
-    );
+    requestContext(tab.id, selectedText);
   }
 });
+
+async function requestContext(tabId: number, selectedText: string) {
+  try {
+    const response = await sendMessageToTab(tabId, {
+      action: "getContext",
+      selectedText,
+    });
+
+    if (response?.context) {
+      handleContextRequest(selectedText, response.context, tabId);
+    }
+  } catch {
+    // Content script not injected — inject it and retry
+    try {
+      await chrome.scripting.executeScript({
+        target: { tabId },
+        files: ["content.js"],
+      });
+      await chrome.scripting.insertCSS({
+        target: { tabId },
+        files: ["content.css"],
+      });
+
+      const response = await sendMessageToTab(tabId, {
+        action: "getContext",
+        selectedText,
+      });
+
+      if (response?.context) {
+        handleContextRequest(selectedText, response.context, tabId);
+      }
+    } catch (err) {
+      console.error("Failed to inject content script:", err);
+    }
+  }
+}
+
+function sendMessageToTab(
+  tabId: number,
+  message: Record<string, unknown>
+): Promise<{ context?: string; [key: string]: unknown } | undefined> {
+  return new Promise((resolve, reject) => {
+    chrome.tabs.sendMessage(tabId, message, (response) => {
+      if (chrome.runtime.lastError) {
+        reject(chrome.runtime.lastError);
+      } else {
+        resolve(response);
+      }
+    });
+  });
+}
 
 async function handleContextRequest(
   word: string,
@@ -52,7 +87,7 @@ async function handleContextRequest(
   } catch (error) {
     chrome.tabs.sendMessage(tabId, {
       action: "showError",
-      error: error instanceof Error ? error.message : "Unknown error occurred",
+      error: getErrorMessage(error),
     });
   }
 }

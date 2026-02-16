@@ -6,8 +6,18 @@ import sveltePreprocess from "svelte-preprocess";
 import css from "rollup-plugin-css-only";
 import copy from "rollup-plugin-copy";
 import terser from "@rollup/plugin-terser";
+import replace from "@rollup/plugin-replace";
 
 const production = !process.env.ROLLUP_WATCH;
+
+const envReplace = replace({
+  preventAssignment: true,
+  values: {
+    "process.env.API_BASE_URL": JSON.stringify(
+      process.env.API_BASE_URL || "http://localhost:3004/api"
+    ),
+  },
+});
 
 export default [
   {
@@ -31,6 +41,7 @@ export default [
         dedupe: ["svelte"],
       }),
       commonjs(),
+      envReplace,
       typescript({
         sourceMap: !production,
         inlineSources: !production,
@@ -52,6 +63,7 @@ export default [
       file: "dist/background.js",
     },
     plugins: [
+      envReplace,
       resolve({
         browser: true,
       }),
@@ -74,6 +86,7 @@ export default [
       file: "dist/content.js",
     },
     plugins: [
+      envReplace,
       svelte({
         preprocess: sveltePreprocess(),
         compilerOptions: {
